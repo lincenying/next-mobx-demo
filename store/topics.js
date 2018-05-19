@@ -23,9 +23,7 @@ class TopicsStore {
 
     @action
     async getTopics(config) {
-        const {
-            data: { data, success }
-        } = await api.get('https://cnodejs.org/api/v1/topics', config)
+        const { data, success } = await api.get('https://cnodejs.org/api/v1/topics', config)
         if (success === true) {
             this.lists = config.page === 1 ? [].concat(data) : this.lists.concat(data)
             this.page = config.page || 1

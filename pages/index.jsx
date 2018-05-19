@@ -4,6 +4,7 @@ import Head from 'next/head'
 import Router from 'next/router'
 import ls from 'store2'
 import { Link } from '@/routes'
+import { Button, Avatar } from 'antd'
 import mobXHOC from '../components/_mobXHOC'
 
 import '@/assets/less/index.less'
@@ -23,6 +24,9 @@ class Topics extends Component {
     }
     constructor(props) {
         super(props)
+        this.state = {
+            loading: false
+        }
         this.handleLoadMore = this.handleLoadMore.bind(this)
         this.onScroll = this.onScroll.bind(this)
     }
@@ -40,7 +44,9 @@ class Topics extends Component {
     }
     async handleLoadMore() {
         const { page } = this.props.Topics
+        this.setState({ loading: true })
         await this.props.Topics.getTopics({ page: page + 1 })
+        this.setState({ loading: false })
     }
     onScroll() {
         const scrollTop = Math.max(window.pageYOffset, document.documentElement.scrollTop, document.body.scrollTop)
@@ -58,16 +64,17 @@ class Topics extends Component {
                     {lists.map(item => {
                         return (
                             <li key={item.id}>
+                                <Avatar src={item.author.avatar_url} />
                                 <Link route="article" params={{ id: item.id }}>
                                     <a>{item.title}</a>
                                 </Link>
                             </li>
                         )
                     })}
-                    <li>
-                        <a onClick={this.handleLoadMore} href="JavaScript:;">
+                    <li className="page">
+                        <Button type="primary" loading={this.state.loading} onClick={this.handleLoadMore}>
                             加载下一页
-                        </a>
+                        </Button>
                     </li>
                 </ul>
             </div>

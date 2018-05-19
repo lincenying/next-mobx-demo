@@ -13,9 +13,7 @@ class ArticleStore {
 
     @action
     async getArticle(config) {
-        const {
-            data: { data, success }
-        } = await api.get('https://cnodejs.org/api/v1/topic/' + config.id, {})
+        const { data, success } = await api.get('https://cnodejs.org/api/v1/topic/' + config.id, {})
         if (success === true) {
             this.data = data
             this.pathname = config.pathname

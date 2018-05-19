@@ -1,9 +1,15 @@
 {
-  "presets": [
-    "next/babel"
-  ],
-  "plugins": [
-    "transform-decorators-legacy",
-    "transform-class-properties"
-  ]
+    "presets": ["next/babel"],
+    "plugins": [
+        "transform-decorators-legacy",
+        "transform-class-properties",
+        ["styled-jsx/babel", { "plugins": ["styled-jsx-plugin-less"] }],
+        [
+            "import",
+            {
+                "libraryName": "antd",
+                "style": "css"
+            }
+        ]
+    ]
 }

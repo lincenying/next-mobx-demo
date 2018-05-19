@@ -1,11 +1,43 @@
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
+import css from 'styled-jsx/css'
 
 import Link from 'next/link'
 import Head from 'next/head'
 // import Router from 'next/router'
 
 import mobXHOC from '../components/_mobXHOC'
+
+const globalCss = css`
+    pre {
+        overflow: auto;
+    }
+    .article-content img,
+    .reply-item-content img {
+        max-width: 100%;
+    }
+`
+const scopeCss = css`
+    h3 {
+        text-align: center;
+    }
+    .article-content {
+        word-wrap: break-word;
+    }
+    .reply {
+        border-top: 1px solid #ccc;
+    }
+    .reply-item {
+        padding-top: 8px;
+        border-bottom: 1px dashed #ccc;
+        h5 {
+            span {
+                font-weight: 400;
+                font-size: 12px;
+            }
+        }
+    }
+`
 
 @inject('Article')
 @observer
@@ -56,33 +88,10 @@ class Article extends Component {
                             )
                         })}
                 </div>
-                <style jsx>{`
-                    h3 {
-                        text-align: center;
-                    }
-                    .article-content {
-                        word-wrap: break-word;
-                    }
-                    .reply {
-                        border-top: 1px solid #ccc;
-                    }
-                    .reply-item {
-                        border-bottom: 1px dashed #ccc;
-                    }
-                    .reply-item h5 span {
-                        font-weight: 400;
-                        font-size: 12px;
-                    }
-                `}</style>
-                <style jsx global>{`
-                    pre {
-                        overflow: auto;
-                    }
-                    .article-content img,
-                    .reply-item-content img {
-                        max-width: 100%;
-                    }
-                `}</style>
+                <style jsx global>
+                    {globalCss}
+                </style>
+                <style jsx>{scopeCss}</style>
             </div>
         )
     }

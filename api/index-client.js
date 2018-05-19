@@ -49,6 +49,8 @@ export default {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
             }
+        }).then(res => {
+            return res.data
         })
         // }).then(checkStatus).then(checkCode)
     },
@@ -61,6 +63,8 @@ export default {
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
             }
+        }).then(res => {
+            return res.data
         })
         // }).then(checkStatus).then(checkCode)
     }

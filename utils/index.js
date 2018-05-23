@@ -50,9 +50,15 @@ export const sleep = ms => {
     return new Promise(resolve => setTimeout(resolve, ms))
 }
 export const parseCookie = cookies => {
+    if (!cookies) return ''
+    if (typeof cookies === 'string') return cookies
     let cookie = ''
-    Object.keys(cookies).forEach(item => {
-        cookie += item + '=' + cookies[item] + '; '
-    })
-    return cookie
+    try {
+        Object.keys(cookies).forEach(item => {
+            cookie += item + '=' + cookies[item] + '; '
+        })
+        return cookie
+    } catch (error) {
+        return ''
+    }
 }

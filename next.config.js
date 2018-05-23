@@ -35,6 +35,7 @@ const css = withCss({
                 new SWPrecacheWebpackPlugin({
                     cacheId: 'next-demo',
                     filepath: './static/sw.js',
+                    templateFilePath: './sw.tmpl.tpl',
                     minify: true,
                     staticFileGlobsIgnorePatterns: [/\.next\//],
                     staticFileGlobs: [

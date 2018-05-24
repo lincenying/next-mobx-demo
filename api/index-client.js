@@ -38,34 +38,40 @@ axios.interceptors.response.use(response => response, error => Promise.resolve(e
 //     return res
 // }
 
-export default {
-    post(url, data) {
-        return axios({
-            method: 'post',
-            url: config.api + url,
-            data: qs.stringify(data),
-            timeout: config.timeout,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
-            }
-        }).then(res => {
-            return res.data
-        })
-        // }).then(checkStatus).then(checkCode)
-    },
-    get(url, params) {
-        return axios({
-            method: 'get',
-            url: config.api + url,
-            params,
-            timeout: config.timeout,
+export const api = () => {
+    return {
+        api: axios.create({
+            baseURL: config.api,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest'
-            }
-        }).then(res => {
-            return res.data
-        })
-        // }).then(checkStatus).then(checkCode)
+            },
+            timeout: config.timeout
+        }),
+        post(url, data) {
+            return axios({
+                method: 'post',
+                url: config.api + url,
+                data: qs.stringify(data),
+                timeout: config.timeout,
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8'
+                }
+            }).then(res => {
+                return res.data
+            })
+            // }).then(checkStatus).then(checkCode)
+        },
+        get(url, params) {
+            console.log('from client')
+            return axios({
+                method: 'get',
+                url: config.api + url,
+                params,
+                timeout: config.timeout
+            }).then(res => {
+                return res.data
+            })
+            // }).then(checkStatus).then(checkCode)
+        }
     }
 }

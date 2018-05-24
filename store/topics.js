@@ -1,5 +1,4 @@
 import { observable, action } from 'mobx'
-import api from '~api'
 
 class TopicsStore {
     @observable hasNext
@@ -8,6 +7,7 @@ class TopicsStore {
     @observable lists
 
     constructor(
+        api,
         isServer,
         Topics = {
             hasNext: 0,
@@ -17,13 +17,14 @@ class TopicsStore {
         }
     ) {
         Object.keys(Topics).forEach(item => {
-            this[item] = Topics[item]
+            if (item !== '$api') this[item] = Topics[item]
         })
+        this.$api = api
     }
 
     @action
     async getTopics(config) {
-        const { data, success } = await api.get('https://cnodejs.org/api/v1/topics', config)
+        const { data, success } = await this.$api.get('https://cnodejs.org/api/v1/topics', config)
         if (success === true) {
             this.lists = config.page === 1 ? [].concat(data) : this.lists.concat(data)
             this.page = config.page || 1
@@ -34,12 +35,12 @@ class TopicsStore {
 
 export let appStore = null
 
-export default function initAppStore(isServer, lastUpdate) {
+export default function initAppStore(api, isServer, lastUpdate) {
     if (isServer && typeof window === 'undefined') {
-        return new TopicsStore(isServer, lastUpdate)
+        return new TopicsStore(api, isServer, lastUpdate)
     }
     if (appStore === null) {
-        appStore = new TopicsStore(isServer, lastUpdate)
+        appStore = new TopicsStore(api, isServer, lastUpdate)
     }
     return appStore
 }

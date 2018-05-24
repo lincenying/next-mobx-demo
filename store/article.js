@@ -1,19 +1,19 @@
 import { observable, action } from 'mobx'
-import api from '~api'
 
 class ArticleStore {
     @observable pathname
     @observable data
 
-    constructor(isServer, Article = { pathname: '', data: {} }) {
+    constructor(api, isServer, Article = { pathname: '', data: {} }) {
         Object.keys(Article).forEach(item => {
-            this[item] = Article[item]
+            if (item !== '$api') this[item] = Article[item]
         })
+        this.$api = api
     }
 
     @action
     async getArticle(config) {
-        const { data, success } = await api.get('https://cnodejs.org/api/v1/topic/' + config.id, {})
+        const { data, success } = await this.$api.get('https://cnodejs.org/api/v1/topic/' + config.id, {})
         if (success === true) {
             this.data = data
             this.pathname = config.pathname
@@ -23,12 +23,12 @@ class ArticleStore {
 
 export let appStore = null
 
-export default function initAppStore(isServer, lastUpdate) {
+export default function initAppStore(api, isServer, lastUpdate) {
     if (isServer && typeof window === 'undefined') {
-        return new ArticleStore(isServer, lastUpdate)
+        return new ArticleStore(api, isServer, lastUpdate)
     }
     if (appStore === null) {
-        appStore = new ArticleStore(isServer, lastUpdate)
+        appStore = new ArticleStore(api, isServer, lastUpdate)
     }
     return appStore
 }

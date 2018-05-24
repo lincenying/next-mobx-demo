@@ -1,5 +1,6 @@
 import React from 'react'
 import { Provider } from 'mobx-react'
+import { api } from '~api'
 import TopicsStore from '../store/topics'
 import ArticleStore from '../store/article'
 import GlobalStore from '../store/global'
@@ -8,10 +9,11 @@ export default function mobXHOC(Layouts) {
     return class PageComponent extends React.Component {
         static async getInitialProps(ctx) {
             const isServer = !!ctx.req
-            const topicsStoreDefaults = TopicsStore(isServer)
-            const articleStoreDefaults = ArticleStore(isServer)
-            const globalStoreDefaults = GlobalStore(isServer)
-            const store = { topicsStoreDefaults, articleStoreDefaults, globalStoreDefaults, isServer }
+            const cookies = isServer ? ctx.req.cookies : {}
+            const topicsStoreDefaults = TopicsStore(api(cookies), isServer)
+            const articleStoreDefaults = ArticleStore(api(cookies), isServer)
+            const globalStoreDefaults = GlobalStore(api(cookies), isServer)
+            const store = { topicsStoreDefaults, articleStoreDefaults, globalStoreDefaults, isServer, cookies }
             if (Layouts.getInitialProps) {
                 await Layouts.getInitialProps(ctx, store)
             }
@@ -20,9 +22,9 @@ export default function mobXHOC(Layouts) {
 
         constructor(props) {
             super(props)
-            this.topicsStore = TopicsStore(props.isServer, props.topicsStoreDefaults)
-            this.articleStore = ArticleStore(props.isServer, props.articleStoreDefaults)
-            this.globalStore = GlobalStore(props.isServer, props.globalStoreDefaults)
+            this.topicsStore = TopicsStore(api(props.cookies), props.isServer, props.topicsStoreDefaults)
+            this.articleStore = ArticleStore(api(props.cookies), props.isServer, props.articleStoreDefaults)
+            this.globalStore = GlobalStore(api(props.cookies), props.isServer, props.globalStoreDefaults)
         }
 
         render() {

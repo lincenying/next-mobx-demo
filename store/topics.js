@@ -1,10 +1,14 @@
 import { observable, action } from 'mobx'
 
 class TopicsStore {
-    @observable hasNext
-    @observable page
-    @observable pathname
-    @observable lists
+    @observable
+    hasNext
+    @observable
+    page
+    @observable
+    pathname
+    @observable
+    lists
 
     constructor(
         api,

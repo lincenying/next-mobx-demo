@@ -1,8 +1,10 @@
 import { observable, action } from 'mobx'
 
 class ArticleStore {
-    @observable pathname
-    @observable data
+    @observable
+    pathname
+    @observable
+    data
 
     constructor(api, isServer, Article = { pathname: '', data: {} }) {
         Object.keys(Article).forEach(item => {

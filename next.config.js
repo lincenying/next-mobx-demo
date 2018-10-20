@@ -2,7 +2,7 @@
 const path = require('path')
 const withLess = require('@zeit/next-less')
 const withCss = require('@zeit/next-css')
-const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config')
+// const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
 
 if (typeof require !== 'undefined') {
@@ -55,7 +55,7 @@ const css = withCss({
                 })
             )
         }
-        config = commonsChunkConfig(config, /\.(less|css)$/)
+        // config = commonsChunkConfig(config, /\.(less|css)$/)
         return config
     }
 })

@@ -8,6 +8,8 @@ import Head from 'next/head'
 
 import mobXHOC from '../components/_mobXHOC'
 
+import '@/assets/less/index.less'
+
 const globalCss = css`
     pre {
         overflow: auto;

@@ -19,7 +19,6 @@ export default class MyDocument extends Document {
                     />
                     <meta name="theme-color" content="#673ab7" />
                     <link rel="manifest" href={`/static/manifest.json${version}`} />
-                    <link rel="stylesheet" href={`/_next/static/style.css${version}`} />
                 </Head>
                 <body>
                     <Main />

@@ -14,10 +14,6 @@ const globalCss = css`
     pre {
         overflow: auto;
     }
-    .article-content img,
-    .reply-item-content img {
-        max-width: 100%;
-    }
 `
 const scopeCss = css`
     h3 {
@@ -32,12 +28,6 @@ const scopeCss = css`
     .reply-item {
         padding-top: 8px;
         border-bottom: 1px dashed #ccc;
-        h5 {
-            span {
-                font-weight: 400;
-                font-size: 12px;
-            }
-        }
     }
 `
 
@@ -48,7 +38,7 @@ class Article extends Component {
         const isServer = !!req
         // const cookies = isServer ? req.headers.cookie : null
         if (isServer) {
-            await articleStoreDefaults.getArticle({ id: query.id, pathname: asPath })
+            await articleStoreDefaults.getArticle({ id: query.id, pathname: asPath, cache: 1 })
         } else {
             const { pathname } = articleStoreDefaults
             if (pathname !== asPath) await articleStoreDefaults.getArticle({ id: query.id, pathname: asPath })

@@ -17,6 +17,7 @@ export const api = cookies => {
         }),
         post(url, data = {}) {
             console.log('from server')
+            // console.log(this.cookies)
             const username = this.cookies.username || ''
             const key = md5(url + JSON.stringify(data) + username)
             if (config.cached && data.cache && config.cached.has(key)) {
@@ -39,6 +40,7 @@ export const api = cookies => {
         },
         async get(url, params = {}) {
             console.log('from server')
+            // console.log(this.cookies)
             const username = this.cookies.username || ''
             const key = md5(url + JSON.stringify(params) + username)
             if (config.cached && params.cache && config.cached.has(key)) {

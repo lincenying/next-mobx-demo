@@ -16,7 +16,7 @@ class Topics extends Component {
         const isServer = !!req
         // const cookies = isServer ? req.headers.cookie : null
         if (isServer) {
-            await topicsStoreDefaults.getTopics({ pathname: asPath, ...query })
+            await topicsStoreDefaults.getTopics({ pathname: asPath, ...query, cache: 1 })
         } else {
             const { lists } = topicsStoreDefaults
             if (lists.length === 0) await topicsStoreDefaults.getTopics({ page: 1 })

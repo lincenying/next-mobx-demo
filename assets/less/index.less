@@ -1,6 +1,6 @@
 body {
-    height: auto;
-    background: #eee;
+    height: auto !important;
+    background: #eee !important;
 }
 .main {
     width: 1024px;
@@ -19,6 +19,20 @@ body {
             &.page {
                 text-align: center;
             }
+        }
+    }
+}
+
+.article-content img,
+.reply-item-content img {
+    max-width: 100%;
+}
+
+.reply-item {
+    h5 {
+        span {
+            font-weight: 400;
+            font-size: 12px;
         }
     }
 }

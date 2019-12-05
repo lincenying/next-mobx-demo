@@ -22,6 +22,27 @@ const css = withCss({
         //     fs: 'empty',
         //     child_process: 'empty'
         // }
+        if (isServer) {
+            const antStyles = /antd\/.*?\/style\/css.*?/
+            const origExternals = [...config.externals]
+            config.externals = [
+                (context, request, callback) => {
+                    if (request.match(antStyles)) return callback()
+                    if (typeof origExternals[0] === 'function') {
+                        origExternals[0](context, request, callback)
+                    } else {
+                        callback()
+                    }
+                },
+                ...(typeof origExternals[0] === 'function' ? [] : origExternals)
+            ]
+
+            config.module.rules.unshift({
+                test: antStyles,
+                use: 'null-loader'
+            })
+        }
+
         /* Enable only in Production */
         if (!dev) {
             // Service Worker
@@ -34,7 +55,7 @@ const css = withCss({
             config.plugins.push(
                 new SWPrecacheWebpackPlugin({
                     cacheId: 'next-demo',
-                    filepath: './static/sw.js',
+                    filepath: './public/static/sw.js',
                     templateFilePath: './sw.tmpl.tpl',
                     minify: true,
                     staticFileGlobsIgnorePatterns: [/\.next\//],

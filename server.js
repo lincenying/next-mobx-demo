@@ -16,8 +16,8 @@ const serve = (path, cache) => express.static(resolve(path), { maxAge: cache && 
 app.prepare().then(() => {
     const server = express()
     server.use(cookieParser())
-    server.use('/favicon.ico', serve('./static/favicon.ico'))
-    server.use('/sw.js', serve('./static/sw.js'))
+    server.use('/favicon.ico', serve('./public/static/favicon.ico'))
+    server.use('/sw.js', serve('./public/static/sw.js'))
     server.get('/article/:id', (req, res) => {
         return app.render(req, res, '/article', { id: req.params.id })
     })

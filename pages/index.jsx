@@ -1,15 +1,17 @@
+/* eslint-disable react/require-optimization */
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Head from 'next/head'
 import Router from 'next/router'
 import ls from 'store2'
-import { Link } from '@/routes'
 import { Button, Avatar } from 'antd'
+
+import { Link } from '@/routes'
 import mobXHOC from '../components/_mobXHOC'
 
 import '@/assets/less/index.less'
 
-@inject('Topics')
+@inject('Topics', 'Global')
 @observer
 class Topics extends Component {
     static async getInitialProps({ req, query, asPath }, { topicsStoreDefaults }) {
@@ -43,9 +45,9 @@ class Topics extends Component {
         window.removeEventListener('scroll', this.onScroll)
     }
     async handleLoadMore() {
-        const { page } = this.props.Topics
+        const { page, getTopics } = this.props.Topics
         this.setState({ loading: true })
-        await this.props.Topics.getTopics({ page: page + 1 })
+        await getTopics({ page: page + 1 })
         this.setState({ loading: false })
     }
     onScroll() {

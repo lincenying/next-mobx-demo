@@ -1,4 +1,4 @@
 node_modules/
-static/sw.js
+public/static/sw.js
 .next
 *-error.log

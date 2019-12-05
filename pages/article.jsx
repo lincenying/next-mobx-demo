@@ -1,3 +1,4 @@
+/* eslint-disable react/require-optimization */
 import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import css from 'styled-jsx/css'
@@ -6,7 +7,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 // import Router from 'next/router'
 
-import mobXHOC from '../components/_mobXHOC'
+import mobXHOC from '../components/_mobXHOC.jsx'
 
 import '@/assets/less/index.less'
 
@@ -36,7 +37,6 @@ const scopeCss = css`
 class Article extends Component {
     static async getInitialProps({ req, query, asPath }, { articleStoreDefaults }) {
         const isServer = !!req
-        // const cookies = isServer ? req.headers.cookie : null
         if (isServer) {
             await articleStoreDefaults.getArticle({ id: query.id, pathname: asPath, cache: 1 })
         } else {

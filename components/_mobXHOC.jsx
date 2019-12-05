@@ -12,7 +12,7 @@ export default function mobXHOC(Layouts) {
             const cookies = isServer ? ctx.req.cookies : {}
             const topicsStoreDefaults = TopicsStore(api(cookies), isServer)
             const articleStoreDefaults = ArticleStore(api(cookies), isServer)
-            const globalStoreDefaults = GlobalStore(api(cookies), isServer)
+            const globalStoreDefaults = GlobalStore(isServer)
             const store = { topicsStoreDefaults, articleStoreDefaults, globalStoreDefaults, isServer, cookies }
             if (Layouts.getInitialProps) {
                 await Layouts.getInitialProps(ctx, store)
@@ -24,7 +24,7 @@ export default function mobXHOC(Layouts) {
             super(props)
             this.topicsStore = TopicsStore(api(props.cookies), props.isServer, props.topicsStoreDefaults)
             this.articleStore = ArticleStore(api(props.cookies), props.isServer, props.articleStoreDefaults)
-            this.globalStore = GlobalStore(api(props.cookies), props.isServer, props.globalStoreDefaults)
+            this.globalStore = GlobalStore(props.isServer, props.globalStoreDefaults)
         }
 
         render() {

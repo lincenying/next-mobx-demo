@@ -4,7 +4,7 @@ class GlobalStore {
     @observable
     title
 
-    constructor(api, isServer, Global = { title: 'M.M.F小屋' }) {
+    constructor(isServer, Global = { title: 'M.M.F小屋' }) {
         Object.keys(Global).forEach(item => {
             this[item] = Global[item]
         })

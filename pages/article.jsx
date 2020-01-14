@@ -68,7 +68,7 @@ class Article extends Component {
                             return (
                                 <div key={sub_item.id} className="reply-item">
                                     <h5>
-                                        {sub_item.author.loginname}: <span>[{data.create_at}]</span>
+                                        {sub_item?.author?.loginname}: <span>[{data.create_at}]</span>
                                     </h5>
                                     <div
                                         className="reply-item-content"

@@ -66,7 +66,7 @@ class Topics extends Component {
                     {lists.map(item => {
                         return (
                             <li key={item.id}>
-                                <Avatar src={item.author.avatar_url} />
+                                <Avatar src={item?.author?.avatar_url} />
                                 <Link route="article" params={{ id: item.id }}>
                                     <a>{item.title}</a>
                                 </Link>

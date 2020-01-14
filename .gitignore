@@ -1,4 +1,7 @@
 node_modules/
 public/static/sw.js
-.next
+.next/
+.vscode/
 *-error.log
+.DS_Store
+.idea/

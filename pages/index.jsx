@@ -1,15 +1,13 @@
 /* eslint-disable react/require-optimization */
-import React, { Component } from 'react'
+import '@/assets/less/index.less'
+import { Link } from '@/routes'
+import { Avatar, Button } from 'antd'
 import { inject, observer } from 'mobx-react'
 import Head from 'next/head'
 import Router from 'next/router'
+import React, { Component } from 'react'
 import ls from 'store2'
-import { Button, Avatar } from 'antd'
-
-import { Link } from '@/routes'
 import mobXHOC from '../components/_mobXHOC'
-
-import '@/assets/less/index.less'
 
 @inject('Topics', 'Global')
 @observer
@@ -45,9 +43,10 @@ class Topics extends Component {
         window.removeEventListener('scroll', this.onScroll)
     }
     async handleLoadMore() {
-        const { page, getTopics } = this.props.Topics
+        const { page } = this.props.Topics
         this.setState({ loading: true })
-        await getTopics({ page: page + 1 })
+        // await getTopics.call(this.props.Topics, { page: page + 1 })
+        await this.props.Topics.getTopics({ page: page + 1 })
         this.setState({ loading: false })
     }
     onScroll() {

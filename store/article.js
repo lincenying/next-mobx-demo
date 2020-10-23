@@ -1,4 +1,4 @@
-import { observable, action } from 'mobx'
+import { action, observable } from 'mobx'
 
 class ArticleStore {
     @observable
@@ -15,7 +15,7 @@ class ArticleStore {
 
     @action
     async getArticle(config) {
-        const { data, success } = await this.$api.get('https://cnodejs.org/api/v1/topic/' + config.id, {})
+        const { data, success } = await this.$api.get('/api/v1/topic/' + config.id, {})
         if (success === true) {
             this.data = data
             this.pathname = config.pathname

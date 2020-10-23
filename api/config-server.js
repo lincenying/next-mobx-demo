@@ -6,7 +6,7 @@ if (process.__API__) {
     api = process.__API__
 } else {
     api = process.__API__ = {
-        api: '',
+        api: 'https://www.vue-js.com',
         port: 3030,
         timeout: 30000,
         cached: new lruCache({

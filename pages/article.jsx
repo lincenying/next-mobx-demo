@@ -1,15 +1,12 @@
 /* eslint-disable react/require-optimization */
-import React, { Component } from 'react'
+import '@/assets/scss/index.scss'
 import { inject, observer } from 'mobx-react'
-import css from 'styled-jsx/css'
-
-import Link from 'next/link'
 import Head from 'next/head'
+import Link from 'next/link'
+import React, { Component } from 'react'
+import css from 'styled-jsx/css'
 // import Router from 'next/router'
-
 import mobXHOC from '../components/_mobXHOC.jsx'
-
-import '@/assets/less/index.less'
 
 const globalCss = css`
     pre {

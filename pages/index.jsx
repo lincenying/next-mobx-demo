@@ -1,5 +1,5 @@
 /* eslint-disable react/require-optimization */
-import '@/assets/less/index.less'
+import '@/assets/scss/index.scss'
 import { Link } from '@/routes'
 import { Avatar, Button } from 'antd'
 import { inject, observer } from 'mobx-react'

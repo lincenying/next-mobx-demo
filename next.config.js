@@ -1,6 +1,6 @@
 /* eslint-disable no-inline-comments */
 const path = require('path')
-const withLess = require('@zeit/next-less')
+const withSass = require('@zeit/next-sass')
 const withCss = require('@zeit/next-css')
 // const commonsChunkConfig = require('@zeit/next-css/commons-chunk-config')
 const SWPrecacheWebpackPlugin = require('sw-precache-webpack-plugin')
@@ -81,4 +81,4 @@ const css = withCss({
     }
 })
 
-module.exports = withLess(css)
+module.exports = withSass(css)

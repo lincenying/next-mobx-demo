@@ -1,12 +1,16 @@
 /* eslint-disable react/require-optimization */
-import '@/assets/scss/index.scss'
-import { inject, observer } from 'mobx-react'
+
+import React, { Component } from 'react'
 import Head from 'next/head'
 import Link from 'next/link'
-import React, { Component } from 'react'
-import css from 'styled-jsx/css'
+import { inject, observer } from 'mobx-react'
+
+import { Affix } from 'antd'
 // import Router from 'next/router'
 import mobXHOC from '../components/_mobXHOC.jsx'
+
+import '@/assets/scss/index.scss'
+import css from 'styled-jsx/css'
 
 const globalCss = css`
     pre {
@@ -53,11 +57,13 @@ class Article extends Component {
                     <title>{data.title}</title>
                 </Head>
                 <h3>{data.title}</h3>
-                <p>
-                    <Link href={'/'}>
-                        <a>返回列表</a>
-                    </Link>
-                </p>
+                <Affix offsetTop={20}>
+                    <p>
+                        <Link href={'/'}>
+                            <a>返回列表</a>
+                        </Link>
+                    </p>
+                </Affix>
                 <div className="article-content" dangerouslySetInnerHTML={{ __html: data.content }} />
                 <div className="reply">
                     {data.replies &&

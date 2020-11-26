@@ -1,13 +1,16 @@
 /* eslint-disable react/require-optimization */
-import '@/assets/scss/index.scss'
-import { Link } from '@/routes'
-import { Avatar, Button } from 'antd'
+import React, { Component } from 'react'
 import { inject, observer } from 'mobx-react'
 import Head from 'next/head'
 import Router from 'next/router'
-import React, { Component } from 'react'
 import ls from 'store2'
+
+import { Avatar, Button } from 'antd'
+
+import { Link } from '@/routes'
 import mobXHOC from '../components/_mobXHOC'
+
+import '@/assets/scss/index.scss'
 
 @inject('Topics', 'Global')
 @observer
